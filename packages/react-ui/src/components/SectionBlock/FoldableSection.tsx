@@ -2,7 +2,6 @@ import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import clsx from "clsx";
 import { ChevronRight } from "lucide-react";
 import React, { forwardRef } from "react";
-import { IconButton } from "../IconButton";
 import { Separator } from "../Separator";
 
 export type FoldableSectionRootProps = AccordionPrimitive.AccordionMultipleProps;
@@ -62,14 +61,18 @@ export const FoldableSectionTrigger = forwardRef<
       <div className="openui-foldable-section-trigger-content-wrapper">
         <Separator className="openui-foldable-section-trigger-content-separator" />
         <div className="openui-foldable-section-trigger-content-icon-button-wrapper">
-          <IconButton
-            icon={
-              <ChevronRight className="openui-foldable-section-trigger-content-icon-button-icon" />
-            }
-            size="3-extra-small"
-            variant="secondary"
+          {/* `AccordionPrimitive.Trigger` is already a `<button>`, so the
+              chevron must be a non-interactive element to avoid a
+              `<button>` nested inside another `<button>` (React hydration
+              error). Visually identical — same class, same chevron — but
+              the wrapper is now a `<span aria-hidden>` instead of an
+              `<IconButton>`. */}
+          <span
+            aria-hidden
             className="openui-foldable-section-trigger-content-icon-button"
-          />
+          >
+            <ChevronRight className="openui-foldable-section-trigger-content-icon-button-icon" />
+          </span>
           <div className="openui-foldable-section-trigger-content-text">{text}</div>
         </div>
       </div>

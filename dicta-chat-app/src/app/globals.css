@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+/* Let the composer textarea and message bubbles pick direction from content
+ * (Hebrew/Arabic → RTL, English → LTR) without a global app-wide toggle. */
+.openui-shell-composer textarea,
+.openui-shell-composer input[type="text"] {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+/* Thinking-state visual polish layered on the bundled `openui-behind-the-scenes`
+ * primitive: subtle pulse on the label while the model is mid-think, dimmed
+ * reasoning body, and a smooth slide-in when the panel expands. */
+@keyframes dicta-thinking-pulse {
+  0%, 100% { opacity: 0.55; }
+  50%      { opacity: 1; }
+}
+.dicta-thinking__label--pulse {
+  animation: dicta-thinking-pulse 1.4s ease-in-out infinite;
+}
+.dicta-thinking__content {
+  font-size: 0.85rem;
+  opacity: 0.78;
+  padding-block: 0.25rem;
+  animation: dicta-thinking-reveal 180ms ease-out;
+}
+@keyframes dicta-thinking-reveal {
+  from { opacity: 0; transform: translateY(-2px); }
+  to   { opacity: 0.78; transform: translateY(0); }
+}
+
+/* Per-step rendering inside the Thesys-style ThinkComponent. Each <think>
+ * (or <reasoning>/<thought>) block becomes one .dicta-think-item with an
+ * uppercase title and a markdown-rendered body. */
+.dicta-think-item {
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--openui-elevated-light, rgba(0, 0, 0, 0.04));
+}
+.dicta-think-item:first-child { border-top: 0; }
+.dicta-think-item__title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  opacity: 0.7;
+  margin-bottom: 0.2rem;
+}
+.dicta-think-item__content { font-size: 0.85rem; }
+
+/* Tool flow: one row per call. Mirrors .dicta-think-item layout so reasoning
+ * and tool blocks feel like siblings. Pending tools (no response yet) reuse
+ * the dicta-thinking pulse keyframe via a class on the row. */
+.dicta-tool-item {
+  padding: 0.4rem 0;
+  border-top: 1px solid var(--openui-elevated-light, rgba(0, 0, 0, 0.04));
+  font-size: 0.82rem;
+}
+.dicta-tool-item:first-child { border-top: 0; }
+.dicta-tool-item__name {
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  font-size: 0.8rem;
+  opacity: 0.85;
+  margin-bottom: 0.25rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+.dicta-tool-item__args,
+.dicta-tool-item__response pre {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.78rem;
+  background: var(--openui-elevated-light, rgba(0, 0, 0, 0.04));
+  padding: 0.4rem 0.6rem;
+  border-radius: 6px;
+  margin: 0.25rem 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-x: auto;
+}
+.dicta-tool-item__args {
+  border-inline-start: 2px solid var(--openui-elevated, rgba(0, 0, 0, 0.08));
+}
+.dicta-tool-item__response pre {
+  border-inline-start: 2px solid var(--openui-text-success-primary, rgba(0, 128, 0, 0.6));
+  opacity: 0.9;
+}
+.dicta-tool-item__pending {
+  display: inline-block;
+  padding: 0.25rem 0.5rem;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+/* Per-paragraph direction detection inside the assistant message body.
+ * Without this, an assistant bubble that contains BOTH a Hebrew reasoning
+ * panel and a pure-math TextContent (e.g. "34 ÷ 12 = 2.83") inherits the
+ * Hebrew direction at the container level — and digits + operators are
+ * weak/neutral characters so the math expression flips to RTL. Setting
+ * `unicode-bidi: plaintext` makes each text node pick its own direction
+ * based on its own first strong character: Hebrew text stays RTL, math
+ * (no strong char) defaults to LTR, English (strong LTR) stays LTR. */
+.openui-shell-thread-message-assistant__content p,
+.openui-shell-thread-message-assistant__content [class*="text-content"],
+.openui-shell-thread-message-assistant__content [class*="TextContent"] {
+  unicode-bidi: plaintext;
+  text-align: start;
+}
+
+/* Response footer — Thesys-style action row beneath each completed
+ * assistant message. Copy / Regenerate on one side, feedback toggles on
+ * the other. Hugs the bubble visually via a thin top divider; buttons stay
+ * tertiary (ghost) so they don't compete with the rendered Card above. */
+.dicta-response-footer {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid var(--openui-elevated-light, rgba(0, 0, 0, 0.04));
+  animation: dicta-thinking-reveal 220ms ease-out;
+}
+.dicta-response-footer__spacer { flex: 1; }
+.dicta-response-footer__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: 6px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 0.78rem;
+  color: var(--openui-text-neutral-secondary, rgba(0, 0, 0, 0.55));
+  transition: background-color 120ms ease, color 120ms ease;
+}
+.dicta-response-footer__btn:hover {
+  background: var(--openui-elevated-light, rgba(0, 0, 0, 0.04));
+  color: var(--openui-text-neutral-primary, rgba(0, 0, 0, 0.85));
+}
+.dicta-response-footer__btn:focus-visible {
+  outline: 2px solid var(--openui-text-neutral-primary, rgba(0, 0, 0, 0.85));
+  outline-offset: 1px;
+}
+.dicta-response-footer__btn--active {
+  background: var(--openui-elevated, rgba(0, 0, 0, 0.08));
+  color: var(--openui-text-neutral-primary, rgba(0, 0, 0, 0.85));
+}
+.dicta-response-footer__btn svg { flex-shrink: 0; }

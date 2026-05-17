@@ -1,0 +1,377 @@
+{
+  "root": "Card",
+  "components": {
+    "Card": {
+      "signature": "Card(children: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps | ListBlock | FollowUpBlock | SectionBlock | Tabs | Carousel)[])",
+      "description": "Vertical container for all content in a chat response. Children stack top to bottom automatically."
+    },
+    "CardHeader": {
+      "signature": "CardHeader(title?: string, subtitle?: string)",
+      "description": "Header with optional title and subtitle"
+    },
+    "TextContent": {
+      "signature": "TextContent(text: string, size?: \"small\" | \"default\" | \"large\" | \"small-heavy\" | \"large-heavy\")",
+      "description": "Text block. Supports markdown. Optional size: \"small\" | \"default\" | \"large\" | \"small-heavy\" | \"large-heavy\"."
+    },
+    "MarkDownRenderer": {
+      "signature": "MarkDownRenderer(textMarkdown: string, variant?: \"clear\" | \"card\" | \"sunk\")",
+      "description": "Renders markdown text with optional container variant"
+    },
+    "Callout": {
+      "signature": "Callout(variant: \"info\" | \"warning\" | \"error\" | \"success\" | \"neutral\", title: string, description: string, visible?: $binding<boolean>)",
+      "description": "Callout banner. Optional visible is a reactive $boolean — auto-dismisses after 3s by setting $visible to false."
+    },
+    "TextCallout": {
+      "signature": "TextCallout(variant?: \"neutral\" | \"info\" | \"warning\" | \"success\" | \"danger\", title?: string, description?: string)",
+      "description": "Text callout with variant, title, and description"
+    },
+    "Image": {
+      "signature": "Image(alt: string, src?: string)",
+      "description": "Image with alt text and optional URL"
+    },
+    "ImageBlock": {
+      "signature": "ImageBlock(src: string, alt?: string)",
+      "description": "Image block with loading state"
+    },
+    "ImageGallery": {
+      "signature": "ImageGallery(images: {src: string, alt?: string, details?: string}[])",
+      "description": "Gallery grid of images with modal preview"
+    },
+    "CodeBlock": {
+      "signature": "CodeBlock(language: string, codeString: string)",
+      "description": "Syntax-highlighted code block"
+    },
+    "Separator": {
+      "signature": "Separator(orientation?: \"horizontal\" | \"vertical\", decorative?: boolean)",
+      "description": "Visual divider between content sections"
+    },
+    "Table": {
+      "signature": "Table(columns: Col[])",
+      "description": "Data table — column-oriented. Each Col holds its own data array."
+    },
+    "Col": {
+      "signature": "Col(label: string, data: any, type?: \"string\" | \"number\" | \"action\")",
+      "description": "Column definition — holds label + data array"
+    },
+    "BarChart": {
+      "signature": "BarChart(labels: string[], series: Series[], variant?: \"grouped\" | \"stacked\", xLabel?: string, yLabel?: string)",
+      "description": "Vertical bars; use for comparing values across categories with one or more series"
+    },
+    "LineChart": {
+      "signature": "LineChart(labels: string[], series: Series[], variant?: \"linear\" | \"natural\" | \"step\", xLabel?: string, yLabel?: string)",
+      "description": "Lines over categories; use for trends and continuous data over time"
+    },
+    "AreaChart": {
+      "signature": "AreaChart(labels: string[], series: Series[], variant?: \"linear\" | \"natural\" | \"step\", xLabel?: string, yLabel?: string)",
+      "description": "Filled area under lines; use for cumulative totals or volume trends over time"
+    },
+    "RadarChart": {
+      "signature": "RadarChart(labels: string[], series: Series[])",
+      "description": "Spider/web chart; use for comparing multiple variables across one or more entities"
+    },
+    "HorizontalBarChart": {
+      "signature": "HorizontalBarChart(labels: string[], series: Series[], variant?: \"grouped\" | \"stacked\", xLabel?: string, yLabel?: string)",
+      "description": "Horizontal bars; prefer when category labels are long or for ranked lists"
+    },
+    "Series": {
+      "signature": "Series(category: string, values: number[])",
+      "description": "One data series"
+    },
+    "PieChart": {
+      "signature": "PieChart(labels: string[], values: number[], variant?: \"pie\" | \"donut\")",
+      "description": "Circular slices; use plucked arrays: PieChart(data.categories, data.values)"
+    },
+    "RadialChart": {
+      "signature": "RadialChart(labels: string[], values: number[])",
+      "description": "Radial bars; use plucked arrays: RadialChart(data.categories, data.values)"
+    },
+    "SingleStackedBarChart": {
+      "signature": "SingleStackedBarChart(labels: string[], values: number[])",
+      "description": "Single horizontal stacked bar; use plucked arrays: SingleStackedBarChart(data.categories, data.values)"
+    },
+    "Slice": {
+      "signature": "Slice(category: string, value: number)",
+      "description": "One slice with label and numeric value"
+    },
+    "ScatterChart": {
+      "signature": "ScatterChart(datasets: ScatterSeries[], xLabel?: string, yLabel?: string)",
+      "description": "X/Y scatter plot; use for correlations, distributions, and clustering"
+    },
+    "ScatterSeries": {
+      "signature": "ScatterSeries(name: string, points: Point[])",
+      "description": "Named dataset"
+    },
+    "Point": {
+      "signature": "Point(x: number, y: number, z?: number)",
+      "description": "Data point with numeric coordinates"
+    },
+    "Form": {
+      "signature": "Form(name: string, buttons: Buttons, fields?: FormControl[])",
+      "description": "Form container with fields and explicit action buttons"
+    },
+    "FormControl": {
+      "signature": "FormControl(label: string, input: Input | TextArea | Select | DatePicker | Slider | CheckBoxGroup | RadioGroup, hint?: string)",
+      "description": "Field with label, input component, and optional hint text"
+    },
+    "Label": {
+      "signature": "Label(text: string)",
+      "description": "Text label"
+    },
+    "Input": {
+      "signature": "Input(name: string, placeholder?: string, type?: \"text\" | \"email\" | \"password\" | \"number\" | \"url\", rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<string>)",
+      "description": ""
+    },
+    "TextArea": {
+      "signature": "TextArea(name: string, placeholder?: string, rows?: number, rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<string>)",
+      "description": ""
+    },
+    "Select": {
+      "signature": "Select(name: string, items: SelectItem[], placeholder?: string, rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<string>)",
+      "description": ""
+    },
+    "SelectItem": {
+      "signature": "SelectItem(value: string, label: string)",
+      "description": "Option for Select"
+    },
+    "DatePicker": {
+      "signature": "DatePicker(name: string, mode?: \"single\" | \"range\", rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<any>)",
+      "description": ""
+    },
+    "Slider": {
+      "signature": "Slider(name: string, variant: \"continuous\" | \"discrete\", min: number, max: number, step?: number, defaultValue?: number[], label?: string, rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<number[]>)",
+      "description": "Numeric slider input; supports continuous and discrete (stepped) variants"
+    },
+    "CheckBoxGroup": {
+      "signature": "CheckBoxGroup(name: string, items: CheckBoxItem[], rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<Record<string, boolean>>)",
+      "description": ""
+    },
+    "CheckBoxItem": {
+      "signature": "CheckBoxItem(label: string, description: string, name: string, defaultChecked?: boolean)",
+      "description": ""
+    },
+    "RadioGroup": {
+      "signature": "RadioGroup(name: string, items: RadioItem[], defaultValue?: string, rules?: {required?: boolean, email?: boolean, url?: boolean, numeric?: boolean, min?: number, max?: number, minLength?: number, maxLength?: number, pattern?: string}, value?: $binding<string>)",
+      "description": ""
+    },
+    "RadioItem": {
+      "signature": "RadioItem(label: string, description: string, value: string)",
+      "description": ""
+    },
+    "SwitchGroup": {
+      "signature": "SwitchGroup(name: string, items: SwitchItem[], variant?: \"clear\" | \"card\" | \"sunk\", value?: $binding<Record<string, boolean>>)",
+      "description": "Group of switch toggles"
+    },
+    "SwitchItem": {
+      "signature": "SwitchItem(label?: string, description?: string, name: string, defaultChecked?: boolean)",
+      "description": "Individual switch toggle"
+    },
+    "Button": {
+      "signature": "Button(label: string, action?: ActionExpression, variant?: \"primary\" | \"secondary\" | \"tertiary\", type?: \"normal\" | \"destructive\", size?: \"extra-small\" | \"small\" | \"medium\" | \"large\")",
+      "description": "Clickable button"
+    },
+    "Buttons": {
+      "signature": "Buttons(buttons: Button[], direction?: \"row\" | \"column\")",
+      "description": "Group of Button components. direction: \"row\" (default) | \"column\"."
+    },
+    "ListBlock": {
+      "signature": "ListBlock(items: ListItem[], variant?: \"number\" | \"image\")",
+      "description": "A list of items with number or image indicators. Each item can optionally have an action."
+    },
+    "ListItem": {
+      "signature": "ListItem(title: string, subtitle?: string, image?: {src: string, alt: string}, actionLabel?: string, action?: ActionExpression)",
+      "description": "Item in a ListBlock — displays a title with an optional subtitle and image. When action is provided, the item becomes clickable."
+    },
+    "FollowUpBlock": {
+      "signature": "FollowUpBlock(items: FollowUpItem[])",
+      "description": "List of clickable follow-up suggestions placed at the end of a response"
+    },
+    "FollowUpItem": {
+      "signature": "FollowUpItem(text: string)",
+      "description": "Clickable follow-up suggestion — when clicked, sends text as user message"
+    },
+    "SectionBlock": {
+      "signature": "SectionBlock(sections: SectionItem[], isFoldable?: boolean)",
+      "description": "Collapsible accordion sections. Auto-opens sections as they stream in. Use SectionItem for each section."
+    },
+    "SectionItem": {
+      "signature": "SectionItem(value: string, trigger: string, content: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps | ListBlock | FollowUpBlock)[])",
+      "description": "Section with a label and collapsible content — used inside SectionBlock"
+    },
+    "Tabs": {
+      "signature": "Tabs(items: TabItem[])",
+      "description": "Tabbed container"
+    },
+    "TabItem": {
+      "signature": "TabItem(value: string, trigger: string, content: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps)[])",
+      "description": "value is unique id, trigger is tab label, content is array of components"
+    },
+    "Accordion": {
+      "signature": "Accordion(items: AccordionItem[])",
+      "description": "Collapsible sections"
+    },
+    "AccordionItem": {
+      "signature": "AccordionItem(value: string, trigger: string, content: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps)[])",
+      "description": "value is unique id, trigger is section title"
+    },
+    "Steps": {
+      "signature": "Steps(items: StepsItem[])",
+      "description": "Step-by-step guide"
+    },
+    "StepsItem": {
+      "signature": "StepsItem(title: string, details: string)",
+      "description": "title and details text for one step"
+    },
+    "Carousel": {
+      "signature": "Carousel(children: (TextContent | MarkDownRenderer | CardHeader | Callout | TextCallout | CodeBlock | Image | ImageBlock | ImageGallery | Separator | HorizontalBarChart | RadarChart | PieChart | RadialChart | SingleStackedBarChart | ScatterChart | AreaChart | BarChart | LineChart | Table | TagBlock | Form | Buttons | Steps)[][], variant?: \"card\" | \"sunk\")",
+      "description": "Horizontal scrollable carousel"
+    },
+    "TagBlock": {
+      "signature": "TagBlock(tags: string[])",
+      "description": "tags is an array of strings"
+    },
+    "Tag": {
+      "signature": "Tag(text: string, icon?: string, size?: \"sm\" | \"md\" | \"lg\", variant?: \"neutral\" | \"info\" | \"success\" | \"warning\" | \"danger\")",
+      "description": "Styled tag/badge with optional icon and variant"
+    }
+  },
+  "componentGroups": [
+    {
+      "name": "Content",
+      "components": [
+        "CardHeader",
+        "TextContent",
+        "MarkDownRenderer",
+        "Callout",
+        "TextCallout",
+        "Image",
+        "ImageBlock",
+        "ImageGallery",
+        "CodeBlock",
+        "Separator"
+      ]
+    },
+    {
+      "name": "Tables",
+      "components": [
+        "Table",
+        "Col"
+      ]
+    },
+    {
+      "name": "Charts (2D)",
+      "components": [
+        "BarChart",
+        "LineChart",
+        "AreaChart",
+        "RadarChart",
+        "HorizontalBarChart",
+        "Series"
+      ]
+    },
+    {
+      "name": "Charts (1D)",
+      "components": [
+        "PieChart",
+        "RadialChart",
+        "SingleStackedBarChart",
+        "Slice"
+      ]
+    },
+    {
+      "name": "Charts (Scatter)",
+      "components": [
+        "ScatterChart",
+        "ScatterSeries",
+        "Point"
+      ]
+    },
+    {
+      "name": "Forms",
+      "components": [
+        "Form",
+        "FormControl",
+        "Label",
+        "Input",
+        "TextArea",
+        "Select",
+        "SelectItem",
+        "DatePicker",
+        "Slider",
+        "CheckBoxGroup",
+        "CheckBoxItem",
+        "RadioGroup",
+        "RadioItem",
+        "SwitchGroup",
+        "SwitchItem"
+      ],
+      "notes": [
+        "- Define EACH FormControl as its own reference — do NOT inline all controls in one array.",
+        "- NEVER nest Form inside Form.",
+        "- Form requires explicit buttons. Always pass a Buttons(...) reference as the third Form argument.",
+        "- rules is an optional object: { required: true, email: true, min: 8, maxLength: 100 }",
+        "- The renderer shows error messages automatically — do NOT generate error text in the UI"
+      ]
+    },
+    {
+      "name": "Buttons",
+      "components": [
+        "Button",
+        "Buttons"
+      ]
+    },
+    {
+      "name": "Lists & Follow-ups",
+      "components": [
+        "ListBlock",
+        "ListItem",
+        "FollowUpBlock",
+        "FollowUpItem"
+      ],
+      "notes": [
+        "- Use ListBlock with ListItem references for numbered, clickable lists.",
+        "- Use FollowUpBlock with FollowUpItem references at the end of a response to suggest next actions.",
+        "- Clicking a ListItem or FollowUpItem sends its text to the LLM as a user message.",
+        "- Example: list = ListBlock([item1, item2])  item1 = ListItem(\"Option A\", \"Details about A\")"
+      ]
+    },
+    {
+      "name": "Sections",
+      "components": [
+        "SectionBlock",
+        "SectionItem"
+      ],
+      "notes": [
+        "- SectionBlock renders collapsible accordion sections that auto-open as they stream.",
+        "- Each section needs a unique `value` id, a `trigger` label, and a `content` array.",
+        "- Example: sections = SectionBlock([s1, s2])  s1 = SectionItem(\"intro\", \"Introduction\", [content1])",
+        "- Set isFoldable=false to render sections as flat headers instead of accordion."
+      ]
+    },
+    {
+      "name": "Layout",
+      "components": [
+        "Tabs",
+        "TabItem",
+        "Accordion",
+        "AccordionItem",
+        "Steps",
+        "StepsItem",
+        "Carousel"
+      ],
+      "notes": [
+        "- Use Tabs to present alternative views — each TabItem has a value id, trigger label, and content array.",
+        "- Carousel takes an array of slides, where each slide is an array of content: carousel = Carousel([[t1, img1], [t2, img2]])",
+        "- IMPORTANT: Every slide in a Carousel must have the same structure — same component types in the same order.",
+        "- For image carousels use: [[title, image, description, tags], ...] — every slide must follow this exact pattern.",
+        "- Use real, publicly accessible image URLs (e.g. https://picsum.photos/seed/KEYWORD/800/500). Never hallucinate image URLs."
+      ]
+    },
+    {
+      "name": "Data Display",
+      "components": [
+        "TagBlock",
+        "Tag"
+      ]
+    }
+  ]
+}
