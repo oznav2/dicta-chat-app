@@ -45,6 +45,13 @@ typings
 
 # Logs
 *storybook.log
+.playwright-mcp/
+.agents/
+
+# Screenshots and temp files
+*.png
+memories.json
+skills-lock.json
 
 # scripts and tools
 clean-install.sh
